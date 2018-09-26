@@ -1,0 +1,75 @@
+Ansible installation on rhel-2 instances
+1.ansible-control-server
+2.ansible-host
+1.ansible-control-server
+sudo su -
+yum update -y
+2.ansible-host
+sudo su -
+yum update -y
+1.ansible-control-server
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install ansible -y
+ansible --version
+useradd ansadmin
+passwd ansadmin
+2.ansible-host
+useradd ansadmin
+passwd ansadmin
+1.ansible-control-server
+visudo
+   ansadmin  ALL   ALL
+
+2.ansible-host
+visudo 
+    ansible ALL   ALL
+1.ansible-control-server
+cd /etc/ssh
+ls
+
+vi sshd_config
+   passwordauthentication yes
+service sshd restart
+2.ansible-host
+vi /etc/ssh/sshd-config
+   passwordauthentication yes
+service sshd restart
+
+1.ansible-control-server
+loggin as ansadmin with passwd
+ssh-keygen
+ls -la
+cd .ssh
+ls
+
+2.ansible-host
+ifconfig -a
+ inet-ipaddress
+ copy the ip address
+1.ansible-control-server-ansible admin
+ssh-copy-id ipaddress
+sudo vi /etc/ansible/hosts
+ delete all data and put
+ [all_hostd]
+ hostipaddress
+ esc:wq
+ansible all -m ping
+cd
+pwd  (home)
+cat > hello.html
+ <h1> hello every one wellcome </h1>
+ esc+c
+
+ls
+ansible all -m copy -a "scr=/home/ansadmin/hello.html dest=/home/ansadmin"
+ansible -s all -m yum -a "name=httpd state=latest"
+ansible -s all -m service -a "name=httpd state=started"
+
+
+
+
+
+
+
+
+
